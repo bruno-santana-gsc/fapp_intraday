@@ -51,18 +51,21 @@ export const TOP_PRODUCTS: TopProduct[] = [
 ];
 
 export const PHARMACY_PERFORMANCE: PharmacyPerformance[] = [
-  { name: 'PharmaPlus Matriz', gmv: 42500, gmvDelta: 15.2, orders: 156, cancellations: 2, cancellationDelta: -1, deliveryTime: '22 min', deliveryTimeDelta: -3 },
-  { name: 'MediCare Central', gmv: 38200, gmvDelta: 8.4, orders: 142, cancellations: 5, cancellationDelta: 2, deliveryTime: '28 min', deliveryTimeDelta: 2 },
-  { name: 'HealthHub Sul', gmv: 31000, gmvDelta: -12.5, orders: 128, cancellations: 12, cancellationDelta: 8, deliveryTime: '45 min', deliveryTimeDelta: 12 },
-  { name: 'WellPharm Direct', gmv: 28400, gmvDelta: 5.1, orders: 110, cancellations: 3, cancellationDelta: 0, deliveryTime: '24 min', deliveryTimeDelta: -1 },
-  { name: 'QuickMeds Express', gmv: 21200, gmvDelta: 18.2, orders: 98, cancellations: 2, cancellationDelta: 0, deliveryTime: '20 min', deliveryTimeDelta: -2 },
-  { name: 'BioSaúde Premium', gmv: 18900, gmvDelta: 12.5, orders: 92, cancellations: 4, cancellationDelta: 1, deliveryTime: '31 min', deliveryTimeDelta: 3 },
-  { name: 'DrogaLuz Online', gmv: 16400, gmvDelta: -4.2, orders: 85, cancellations: 7, cancellationDelta: 3, deliveryTime: '35 min', deliveryTimeDelta: 5 },
-  { name: 'VidaFarma Matriz', gmv: 14200, gmvDelta: 22.1, orders: 78, cancellations: 1, cancellationDelta: -1, deliveryTime: '19 min', deliveryTimeDelta: -4 },
-  { name: 'Nossa Farma Centro', gmv: 12800, gmvDelta: 3.8, orders: 65, cancellations: 3, cancellationDelta: 0, deliveryTime: '26 min', deliveryTimeDelta: 0 },
-  { name: 'FarmaPopular 24h', gmv: 11500, gmvDelta: 7.4, orders: 58, cancellations: 1, cancellationDelta: -2, deliveryTime: '23 min', deliveryTimeDelta: -2 },
-  { name: 'Drogaria do Povo', gmv: 10200, gmvDelta: -2.1, orders: 49, cancellations: 4, cancellationDelta: 1, deliveryTime: '38 min', deliveryTimeDelta: 4 },
-  { name: 'Farmácia Popular Viva', gmv: 9800, gmvDelta: -45.0, orders: 42, cancellations: 15, cancellationDelta: 10, deliveryTime: '58 min', deliveryTimeDelta: 25 },
+  { name: 'PharmaPlus Matriz', region: 'Sudeste', gmv: 42500, gmvDelta: 15.2, orders: 156, cancellations: 2, cancellationDelta: -1, deliveryTime: '22 min', deliveryTimeDelta: -3 },
+  { name: 'MediCare Central', region: 'Sudeste', gmv: 38200, gmvDelta: 8.4, orders: 142, cancellations: 5, cancellationDelta: 2, deliveryTime: '28 min', deliveryTimeDelta: 2 },
+  { name: 'HealthHub Sul', region: 'Sul', gmv: 31000, gmvDelta: -12.5, orders: 128, cancellations: 12, cancellationDelta: 8, deliveryTime: '45 min', deliveryTimeDelta: 12 },
+  { name: 'WellPharm Direct', region: 'Nordeste', gmv: 28400, gmvDelta: 5.1, orders: 110, cancellations: 3, cancellationDelta: 0, deliveryTime: '24 min', deliveryTimeDelta: -1 },
+  { name: 'QuickMeds Express', region: 'Sudeste', gmv: 21200, gmvDelta: 18.2, orders: 98, cancellations: 2, cancellationDelta: 0, deliveryTime: '20 min', deliveryTimeDelta: -2 },
+  { name: 'BioSaúde Premium', region: 'Sul', gmv: 18900, gmvDelta: 12.5, orders: 92, cancellations: 4, cancellationDelta: 1, deliveryTime: '31 min', deliveryTimeDelta: 3 },
+  { name: 'DrogaLuz Online', region: 'Centro-Oeste', gmv: 16400, gmvDelta: -4.2, orders: 85, cancellations: 7, cancellationDelta: 3, deliveryTime: '35 min', deliveryTimeDelta: 5 },
+  { name: 'VidaFarma Matriz', region: 'Nordeste', gmv: 14200, gmvDelta: 22.1, orders: 78, cancellations: 1, cancellationDelta: -1, deliveryTime: '19 min', deliveryTimeDelta: -4 },
+  { name: 'Nossa Farma Centro', region: 'Sudeste', gmv: 12800, gmvDelta: 3.8, orders: 65, cancellations: 3, cancellationDelta: 0, deliveryTime: '26 min', deliveryTimeDelta: 0 },
+  { name: 'FarmaPopular 24h', region: 'Norte', gmv: 11500, gmvDelta: 7.4, orders: 58, cancellations: 1, cancellationDelta: -2, deliveryTime: '23 min', deliveryTimeDelta: -2 },
+  { name: 'Drogaria do Povo', region: 'Nordeste', gmv: 10200, gmvDelta: -2.1, orders: 49, cancellations: 4, cancellationDelta: 1, deliveryTime: '38 min', deliveryTimeDelta: 4 },
+  { name: 'Farmácia Popular Viva', region: 'Norte', gmv: 9800, gmvDelta: -45.0, orders: 42, cancellations: 15, cancellationDelta: 10, deliveryTime: '58 min', deliveryTimeDelta: 25 },
+  { name: 'SulMeds Regional', region: 'Sul', gmv: 8500, gmvDelta: 12.0, orders: 38, cancellations: 0, cancellationDelta: -2, deliveryTime: '21 min', deliveryTimeDelta: -2 },
+  { name: 'Centro Pharm', region: 'Centro-Oeste', gmv: 7900, gmvDelta: 3.5, orders: 32, cancellations: 2, cancellationDelta: 0, deliveryTime: '29 min', deliveryTimeDelta: 1 },
+  { name: 'Beira Rio Farma', region: 'Norte', gmv: 6200, gmvDelta: -5.1, orders: 25, cancellations: 3, cancellationDelta: 1, deliveryTime: '34 min', deliveryTimeDelta: 3 },
 ];
 
 export const LOGISTICS_STATUS: LogisticStatus[] = [

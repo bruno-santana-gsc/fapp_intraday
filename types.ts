@@ -27,6 +27,7 @@ export interface TopProduct {
 
 export interface PharmacyPerformance {
   name: string;
+  region: 'Norte' | 'Nordeste' | 'Centro-Oeste' | 'Sudeste' | 'Sul';
   gmv: number;
   gmvDelta: number; // Porcentagem de variação vs ciclo anterior
   orders: number;

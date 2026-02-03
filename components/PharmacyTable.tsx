@@ -1,53 +1,58 @@
 
 import React from 'react';
-import { PHARMACY_PERFORMANCE } from '../constants';
+import { PharmacyPerformance } from '../types';
 import { Card } from './Card';
 
-export const PharmacyTable: React.FC = () => {
-  const sortedByGmv = [...PHARMACY_PERFORMANCE].sort((a, b) => b.gmv - a.gmv);
-  
-  const gainers = [...PHARMACY_PERFORMANCE].sort((a, b) => b.gmvDelta - a.gmvDelta).slice(0, 3);
-  const decliners = [...PHARMACY_PERFORMANCE].sort((a, b) => a.gmvDelta - b.gmvDelta).slice(0, 3);
+interface PharmacyTableProps {
+  pharmacies: PharmacyPerformance[];
+  regionName: string;
+}
 
-  const bestPharmacyName = sortedByGmv[0].name;
-  const worstPharmacyName = sortedByGmv[sortedByGmv.length - 1].name;
+export const PharmacyTable: React.FC<PharmacyTableProps> = ({ pharmacies, regionName }) => {
+  const sortedByGmv = [...pharmacies].sort((a, b) => b.gmv - a.gmv);
+  
+  const gainers = [...pharmacies].sort((a, b) => b.gmvDelta - a.gmvDelta).slice(0, 3);
+  const decliners = [...pharmacies].sort((a, b) => a.gmvDelta - b.gmvDelta).slice(0, 3);
+
+  const bestPharmacyName = sortedByGmv.length > 0 ? sortedByGmv[0].name : null;
+  const worstPharmacyName = sortedByGmv.length > 0 ? sortedByGmv[sortedByGmv.length - 1].name : null;
 
   return (
-    <Card title="Performance das Farmácias (Visão Geral)" className="h-full">
-      {/* Top Highlights - Simplified for clarity */}
+    <Card title={`Performance das Farmácias - ${regionName}`} className="h-full">
+      {/* Top Highlights */}
       <div className="flex flex-wrap gap-4 mb-6">
         <div className="flex-1 min-w-[180px] p-3 rounded-2xl bg-brand-turquoise/5 border border-brand-turquoise/10">
           <p className="text-[9px] font-extrabold text-brand-turquoise uppercase tracking-widest mb-2 flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-turquoise animate-pulse" />
-            Em Alta (GMV)
+            Em Alta (Ciclo)
           </p>
           <div className="flex gap-4">
-            {gainers.map((r, i) => (
+            {gainers.length > 0 ? gainers.map((r, i) => (
               <div key={i} className="flex flex-col">
                 <span className="text-[10px] font-bold text-brand-darkGray truncate max-w-[80px] leading-tight">{r.name}</span>
                 <span className="text-[10px] font-black text-brand-turquoise leading-none">+{r.gmvDelta}%</span>
               </div>
-            ))}
+            )) : <span className="text-[10px] text-brand-teal opacity-50 italic">Sem dados</span>}
           </div>
         </div>
 
         <div className="flex-1 min-w-[180px] p-3 rounded-2xl bg-brand-salmon/5 border border-brand-salmon/10">
           <p className="text-[9px] font-extrabold text-brand-salmon uppercase tracking-widest mb-2 flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-salmon" />
-            Atenção (Quedas)
+            Atenção (Ciclo)
           </p>
           <div className="flex gap-4">
-            {decliners.map((r, i) => (
+            {decliners.length > 0 ? decliners.map((r, i) => (
               <div key={i} className="flex flex-col">
                 <span className="text-[10px] font-bold text-brand-darkGray truncate max-w-[80px] leading-tight">{r.name}</span>
                 <span className="text-[10px] font-black text-brand-salmon leading-none">{r.gmvDelta}%</span>
               </div>
-            ))}
+            )) : <span className="text-[10px] text-brand-teal opacity-50 italic">Sem dados</span>}
           </div>
         </div>
       </div>
 
-      {/* Main Table - Optimized density to fill space vertically */}
+      {/* Main Table */}
       <div className="overflow-x-auto -mx-2">
         <table className="w-full text-left border-separate border-spacing-y-1.5">
           <thead>
@@ -60,7 +65,7 @@ export const PharmacyTable: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {sortedByGmv.map((pharmacy, idx) => {
+            {sortedByGmv.length > 0 ? sortedByGmv.map((pharmacy, idx) => {
               const isBest = pharmacy.name === bestPharmacyName;
               const isWorst = pharmacy.name === worstPharmacyName;
 
@@ -82,7 +87,7 @@ export const PharmacyTable: React.FC = () => {
                         {isBest && <span className="text-[8px] text-brand-turquoise">★</span>}
                       </div>
                       <span className={`text-[8px] font-bold mt-0.5 ${pharmacy.gmvDelta > 0 ? 'text-brand-turquoise' : 'text-brand-salmon'}`}>
-                        {pharmacy.gmvDelta > 0 ? '↑' : '↓'} {Math.abs(pharmacy.gmvDelta)}% vs Ciclo Ant.
+                        {pharmacy.gmvDelta > 0 ? '↑' : '↓'} {Math.abs(pharmacy.gmvDelta)}% • <span className="opacity-60">{pharmacy.region}</span>
                       </span>
                     </div>
                   </td>
@@ -124,13 +129,19 @@ export const PharmacyTable: React.FC = () => {
                   </td>
                 </tr>
               );
-            })}
+            }) : (
+              <tr>
+                <td colSpan={5} className="py-20 text-center">
+                   <p className="text-[10px] font-bold text-brand-teal uppercase tracking-widest opacity-40">Nenhuma farmácia encontrada para esta região no ciclo atual</p>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
       
       <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-[9px] font-black uppercase tracking-widest text-brand-teal opacity-40">
-        <span>Consolidação por Ciclo • Janelas de 30min</span>
+        <span>Consolidação por Ciclo • Regional: {regionName}</span>
         <div className="flex gap-4">
           <button className="hover:text-brand-turquoise transition-colors">Alertas Ativos</button>
           <button className="hover:text-brand-turquoise transition-colors">Exportar Tudo</button>

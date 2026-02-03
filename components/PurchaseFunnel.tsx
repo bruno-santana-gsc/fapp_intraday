@@ -1,13 +1,17 @@
 
 import React from 'react';
-import { FUNNEL_DATA } from '../constants';
+import { FunnelStep } from '../types';
 import { Card } from './Card';
 
-export const PurchaseFunnel: React.FC = () => {
+interface PurchaseFunnelProps {
+  data: FunnelStep[];
+}
+
+export const PurchaseFunnel: React.FC<PurchaseFunnelProps> = ({ data }) => {
   return (
     <Card title="Funil de Compra" className="mb-8">
       <div className="flex flex-col md:flex-row items-stretch justify-between gap-2">
-        {FUNNEL_DATA.map((step, idx) => (
+        {data.map((step, idx) => (
           <div key={idx} className="flex-1 flex flex-col min-w-[120px]">
             <div className="flex justify-between items-end mb-2">
               <span className="text-[11px] font-bold text-brand-darkGray">{step.label}</span>

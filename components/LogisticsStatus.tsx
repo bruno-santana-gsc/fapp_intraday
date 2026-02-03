@@ -1,5 +1,7 @@
+
 import React from 'react';
-import { LOGISTICS_STATUS, DELIVERY_TIMES, PHARMACY_PERFORMANCE } from '../constants';
+import { LOGISTICS_STATUS, DELIVERY_TIMES } from '../constants';
+import { PharmacyPerformance } from '../types';
 import { Card } from './Card';
 
 const statusTranslation: Record<string, string> = {
@@ -9,9 +11,12 @@ const statusTranslation: Record<string, string> = {
   'Delivered': 'Entregue'
 };
 
-export const LogisticsStatus: React.FC = () => {
-  // Calcula os top 5 ofensores logísticos (maior tempo médio de entrega)
-  const topLogisticsOffenders = [...PHARMACY_PERFORMANCE]
+interface LogisticsStatusProps {
+  pharmacies: PharmacyPerformance[];
+}
+
+export const LogisticsStatus: React.FC<LogisticsStatusProps> = ({ pharmacies }) => {
+  const topLogisticsOffenders = [...pharmacies]
     .sort((a, b) => {
       const timeA = parseInt(a.deliveryTime.split(' ')[0]);
       const timeB = parseInt(b.deliveryTime.split(' ')[0]);
@@ -38,7 +43,6 @@ export const LogisticsStatus: React.FC = () => {
         ))}
       </div>
 
-      {/* Tempo Médio KPIs */}
       <div className="space-y-4 mb-6 pt-4 border-t border-gray-50">
         <h4 className="text-[10px] font-bold text-brand-teal uppercase tracking-widest mb-3">Tempo Médio Geral</h4>
         {DELIVERY_TIMES.map((delivery, idx) => (
@@ -49,42 +53,25 @@ export const LogisticsStatus: React.FC = () => {
             </div>
             <div className="text-right">
               <p className="text-sm font-extrabold text-brand-darkGray">{delivery.time}</p>
-              <p className="text-[9px] font-bold text-brand-turquoise">
-                {delivery.trend < 0 ? '↓' : '↑'} {Math.abs(delivery.trend)}% vs ontem
-              </p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Top 5 Ofensores Logísticos */}
       <div className="space-y-3 mb-6">
         <p className="text-[10px] font-bold text-brand-orange uppercase tracking-widest border-b border-brand-orange/10 pb-1">Top 5 Ofensores (Atrasos)</p>
         <div className="space-y-2">
           {topLogisticsOffenders.map((offender, idx) => (
-            <div key={idx} className="flex items-center justify-between p-2.5 rounded-xl bg-brand-orange/5 hover:bg-brand-orange/10 transition-colors border border-transparent hover:border-brand-orange/20 group">
+            <div key={idx} className="flex items-center justify-between p-2.5 rounded-xl bg-brand-orange/5 border border-transparent hover:border-brand-orange/20 group">
               <div className="flex items-center gap-2">
                 <span className="text-[9px] font-black text-brand-orange w-3">{idx + 1}</span>
                 <span className="text-[11px] font-bold text-brand-darkGray truncate max-w-[140px] group-hover:text-brand-orange transition-colors">{offender.name}</span>
               </div>
               <div className="text-right">
                 <p className="text-[10px] font-bold text-brand-orange leading-none">{offender.deliveryTime}</p>
-                <p className="text-[8px] text-brand-teal uppercase font-medium">tempo médio</p>
               </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      <div className="mt-auto">
-        <div className="h-1.5 w-full bg-gray-100 rounded-full flex overflow-hidden">
-            <div className="h-full bg-brand-orange" style={{ width: '10%' }} />
-            <div className="h-full bg-brand-teal" style={{ width: '25%' }} />
-            <div className="h-full bg-brand-turquoise" style={{ width: '65%' }} />
-        </div>
-        <div className="flex justify-between items-center mt-2">
-          <p className="text-[10px] text-brand-teal font-medium">92% dos pedidos no prazo</p>
-          <span className="text-[9px] font-bold text-brand-turquoise bg-brand-turquoise/10 px-2 py-0.5 rounded-full uppercase">Meta Atingida</span>
         </div>
       </div>
     </Card>

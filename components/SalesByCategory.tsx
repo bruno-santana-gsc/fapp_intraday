@@ -1,19 +1,23 @@
 
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { SALES_BY_CATEGORY, TOP_PRODUCTS } from '../constants';
+import { CategoryData } from '../types';
+import { TOP_PRODUCTS } from '../constants';
 import { Card } from './Card';
 
 const COLORS = ['#62D9D1', '#7A8590', '#F78881', '#F7B66E', '#FFB166'];
 
-export const SalesByCategory: React.FC = () => {
+interface SalesByCategoryProps {
+  data: CategoryData[];
+}
+
+export const SalesByCategory: React.FC<SalesByCategoryProps> = ({ data }) => {
   return (
     <Card title="Vendas por Categoria" className="h-full">
-      {/* Gráfico de Categorias */}
       <div className="h-[200px] mb-6">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            data={SALES_BY_CATEGORY}
+            data={data}
             layout="vertical"
             margin={{ top: 5, right: 30, left: 10, bottom: 5 }}
           >
@@ -35,7 +39,7 @@ export const SalesByCategory: React.FC = () => {
               formatter={(value: number) => `R$ ${value.toLocaleString('pt-BR')}`}
             />
             <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={14}>
-              {SALES_BY_CATEGORY.map((entry, index) => (
+              {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Bar>
@@ -43,9 +47,8 @@ export const SalesByCategory: React.FC = () => {
         </ResponsiveContainer>
       </div>
 
-      {/* Listagem de Métricas de Categoria */}
       <div className="space-y-1.5 mb-6">
-        {SALES_BY_CATEGORY.map((cat, idx) => (
+        {data.map((cat, idx) => (
           <div key={idx} className="flex justify-between items-center text-[10px] font-bold">
             <span className="text-brand-teal truncate w-24 uppercase tracking-tighter">{cat.name}</span>
             <div className="flex gap-2 items-center">
@@ -56,11 +59,10 @@ export const SalesByCategory: React.FC = () => {
         ))}
       </div>
 
-      {/* Top 5 Produtos Sold */}
       <div className="pt-4 border-t border-gray-100">
         <p className="text-[10px] font-bold text-brand-teal uppercase tracking-widest mb-3">Top 5 Produtos Vendidos</p>
         <div className="space-y-2">
-          {TOP_PRODUCTS.map((product, idx) => (
+          {TOP_PRODUCTS.slice(0, 5).map((product, idx) => (
             <div key={idx} className="flex items-center justify-between group">
               <div className="flex items-center gap-2 overflow-hidden">
                 <span className="text-[9px] font-black text-brand-turquoise w-3 shrink-0">{idx + 1}</span>
