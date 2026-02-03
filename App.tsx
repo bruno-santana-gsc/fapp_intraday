@@ -114,13 +114,8 @@ const App: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <footer className="mt-8 pt-6 border-t border-gray-200 flex flex-col md:row justify-between items-center gap-4 text-brand-teal text-[10px] font-bold uppercase tracking-widest">
-          <p>© 2024 Farmácias app Tecnologia • Dados consolidados por janelas de 30min</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-brand-turquoise transition-colors">Log de Integração</a>
-            <a href="#" className="hover:text-brand-turquoise transition-colors">Exportar Relatório</a>
-            <a href="#" className="hover:text-brand-turquoise transition-colors">Status da API</a>
-          </div>
+        <footer className="mt-8 pt-6 border-t border-gray-200 flex flex-col items-center text-brand-teal text-[10px] font-bold uppercase tracking-widest text-center">
+          <p>© 2026 Farmácias app Tecnologia • Dados consolidados por janelas de 30min</p>
         </footer>
       </div>
     </div>

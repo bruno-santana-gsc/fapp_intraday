@@ -21,8 +21,8 @@ export const HEADER_KPIS: KPI[] = [
   { label: 'Pedidos Faturados', value: '1.050' },
   { label: 'Taxa de Conversão', value: '4,8', trend: -1.2, prefix: '%' },
   { label: 'Farmácias com Venda', value: '342' },
-  { label: 'Usuários Ativos', value: '12.450' },
-  { label: 'SKUs Ativos', value: '8.902' },
+  { label: 'Usuários com compra', value: '12.450' },
+  { label: 'Ofertas Ativas', value: '8.902' },
 ];
 
 export const FUNNEL_DATA: FunnelStep[] = [
@@ -55,7 +55,13 @@ export const PHARMACY_PERFORMANCE: PharmacyPerformance[] = [
   { name: 'MediCare Central', gmv: 38200, gmvDelta: 8.4, orders: 142, cancellations: 5, cancellationDelta: 2, deliveryTime: '28 min', deliveryTimeDelta: 2 },
   { name: 'HealthHub Sul', gmv: 31000, gmvDelta: -12.5, orders: 128, cancellations: 12, cancellationDelta: 8, deliveryTime: '45 min', deliveryTimeDelta: 12 },
   { name: 'WellPharm Direct', gmv: 28400, gmvDelta: 5.1, orders: 110, cancellations: 3, cancellationDelta: 0, deliveryTime: '24 min', deliveryTimeDelta: -1 },
-  { name: 'QuickMeds Express', gmv: 15200, gmvDelta: 22.8, orders: 85, cancellations: 1, cancellationDelta: -2, deliveryTime: '18 min', deliveryTimeDelta: -5 },
+  { name: 'QuickMeds Express', gmv: 21200, gmvDelta: 18.2, orders: 98, cancellations: 2, cancellationDelta: 0, deliveryTime: '20 min', deliveryTimeDelta: -2 },
+  { name: 'BioSaúde Premium', gmv: 18900, gmvDelta: 12.5, orders: 92, cancellations: 4, cancellationDelta: 1, deliveryTime: '31 min', deliveryTimeDelta: 3 },
+  { name: 'DrogaLuz Online', gmv: 16400, gmvDelta: -4.2, orders: 85, cancellations: 7, cancellationDelta: 3, deliveryTime: '35 min', deliveryTimeDelta: 5 },
+  { name: 'VidaFarma Matriz', gmv: 14200, gmvDelta: 22.1, orders: 78, cancellations: 1, cancellationDelta: -1, deliveryTime: '19 min', deliveryTimeDelta: -4 },
+  { name: 'Nossa Farma Centro', gmv: 12800, gmvDelta: 3.8, orders: 65, cancellations: 3, cancellationDelta: 0, deliveryTime: '26 min', deliveryTimeDelta: 0 },
+  { name: 'FarmaPopular 24h', gmv: 11500, gmvDelta: 7.4, orders: 58, cancellations: 1, cancellationDelta: -2, deliveryTime: '23 min', deliveryTimeDelta: -2 },
+  { name: 'Drogaria do Povo', gmv: 10200, gmvDelta: -2.1, orders: 49, cancellations: 4, cancellationDelta: 1, deliveryTime: '38 min', deliveryTimeDelta: 4 },
   { name: 'Farmácia Popular Viva', gmv: 9800, gmvDelta: -45.0, orders: 42, cancellations: 15, cancellationDelta: 10, deliveryTime: '58 min', deliveryTimeDelta: 25 },
 ];
 
