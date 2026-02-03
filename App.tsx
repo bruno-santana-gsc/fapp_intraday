@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { HeaderKPIs } from './components/HeaderKPIs';
 import { PurchaseFunnel } from './components/PurchaseFunnel';
@@ -8,6 +9,7 @@ import { AIRecommendations } from './components/AIRecommendations';
 import { CancellationStats } from './components/CancellationStats';
 import { AnomalyDetection } from './components/AnomalyDetection';
 import { MarketingHub } from './components/MarketingHub';
+import { Login } from './components/Login';
 
 const LogoText: React.FC = () => (
   <div className="flex items-baseline gap-1 select-none">
@@ -17,6 +19,7 @@ const LogoText: React.FC = () => (
 );
 
 const App: React.FC = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [lastSync, setLastSync] = useState('');
   const [nextSync, setNextSync] = useState(30);
 
@@ -32,6 +35,10 @@ const App: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  if (!isAuthenticated) {
+    return <Login onLogin={setIsAuthenticated} />;
+  }
+
   return (
     <div className="min-h-screen bg-brand-bgGray p-4 md:p-6 lg:p-8">
       <div className="max-w-[1700px] mx-auto">
@@ -41,9 +48,17 @@ const App: React.FC = () => {
             <LogoText />
             <div className="flex items-center gap-2 mt-1">
               <span className="h-px w-8 bg-brand-turquoise"></span>
-              <p className="text-[11px] text-brand-teal font-bold uppercase tracking-widest">
-                Intradiário <span className="text-brand-darkGray opacity-30">•</span> Ciclo de 30 Minutos
-              </p>
+              <div className="flex items-center gap-4">
+                <p className="text-[11px] text-brand-teal font-bold uppercase tracking-widest">
+                  Intradiário <span className="text-brand-darkGray opacity-30">•</span> Ciclo de 30 Minutos
+                </p>
+                <button 
+                  onClick={() => setIsAuthenticated(false)}
+                  className="text-[9px] font-black text-brand-salmon uppercase border border-brand-salmon/20 px-2 py-0.5 rounded hover:bg-brand-salmon hover:text-white transition-all"
+                >
+                  Sair
+                </button>
+              </div>
             </div>
           </div>
           
@@ -99,7 +114,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <footer className="mt-8 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-brand-teal text-[10px] font-bold uppercase tracking-widest">
+        <footer className="mt-8 pt-6 border-t border-gray-200 flex flex-col md:row justify-between items-center gap-4 text-brand-teal text-[10px] font-bold uppercase tracking-widest">
           <p>© 2024 Farmácias app Tecnologia • Dados consolidados por janelas de 30min</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-brand-turquoise transition-colors">Log de Integração</a>
