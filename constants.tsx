@@ -13,7 +13,8 @@ import {
   ChannelPerformance,
   DevicePerformance,
   DailyPerformance,
-  MonthlyForecast
+  MonthlyForecast,
+  SACCategory
 } from './types';
 
 export const HEADER_KPIS: KPI[] = [
@@ -169,6 +170,21 @@ export const ANOMALIES_DATA: Anomaly[] = [
       impact: 'Perda estimada de R$ 4.500/hora'
     }
   }
+];
+
+export const SAC_KPI_DATA: KPI[] = [
+  { label: 'Total de Chamados', value: '452', trend: 12.5 },
+  { label: 'Em Aberto', value: '28', trend: -5.2 },
+  { label: 'Tempo de Resposta', value: '8,5 min', trend: -12.4 },
+  { label: 'CSAT (Satisfação)', value: '4,6/5', trend: 2.1 },
+];
+
+export const SAC_CATEGORIES: SACCategory[] = [
+  { reason: 'Atraso na Entrega', count: 185, trend: 12.5 },
+  { reason: 'Produto Avariado/Incorreto', count: 92, trend: 4.2 },
+  { reason: 'Erro de Pagamento', count: 74, trend: -2.1 },
+  { reason: 'Dúvidas sobre Ofertas', count: 58, trend: 8.4 },
+  { reason: 'Cancelamento Solicitado', count: 43, trend: 1.5 },
 ];
 
 export const TOP_COUPONS: CouponData[] = [

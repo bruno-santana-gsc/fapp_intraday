@@ -9,6 +9,7 @@ import { AIRecommendations } from './components/AIRecommendations';
 import { CancellationStats } from './components/CancellationStats';
 import { AnomalyDetection } from './components/AnomalyDetection';
 import { MarketingHub } from './components/MarketingHub';
+import { CustomerService } from './components/CustomerService';
 import { Login } from './components/Login';
 import { RegionFilter } from './components/RegionFilter';
 import { 
@@ -135,6 +136,11 @@ const App: React.FC = () => {
               <div className="lg:col-span-4">
                 <AnomalyDetection data={regionalData.anomalies} />
               </div>
+              
+              <div className="lg:col-span-12">
+                <CustomerService />
+              </div>
+
               <div className="lg:col-span-4">
                 <SalesByCategory data={regionalData.categorySales} />
               </div>
@@ -144,6 +150,7 @@ const App: React.FC = () => {
               <div className="lg:col-span-4">
                 <CancellationStats pharmacies={regionalData.pharmacies} />
               </div>
+              
               <div className="lg:col-span-12">
                 <MarketingHub 
                   channels={regionalData.marketingChannels} 

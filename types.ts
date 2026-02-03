@@ -99,6 +99,12 @@ export interface DevicePerformance {
   orders: number;
 }
 
+export interface SACCategory {
+  reason: string;
+  count: number;
+  trend: number;
+}
+
 // Monthly Specific Types
 export interface DailyPerformance {
   day: number;
