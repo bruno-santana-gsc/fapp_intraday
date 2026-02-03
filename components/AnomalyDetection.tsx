@@ -9,12 +9,12 @@ interface AnomalyDetectionProps {
 
 export const AnomalyDetection: React.FC<AnomalyDetectionProps> = ({ data }) => {
   return (
-    <Card title="Anomalias Detectadas (Último Ciclo)" className="h-full border-2 border-brand-salmon/20">
-      <div className="space-y-4">
+    <Card title="Anomalias Detectadas (Último Ciclo)" className="h-full border-2 border-brand-salmon/20 flex flex-col">
+      <div className="space-y-4 overflow-y-auto pr-1 max-h-[600px] custom-scrollbar flex-1">
         {data.length > 0 ? data.map((anomaly) => (
           <div 
             key={anomaly.id} 
-            className={`p-4 rounded-xl border transition-all hover:shadow-sm ${
+            className={`p-4 rounded-xl border transition-all hover:shadow-md hover:scale-[1.01] duration-300 ${
               anomaly.severity === 'critical' 
                 ? 'bg-brand-salmon/5 border-brand-salmon/20' 
                 : anomaly.severity === 'warning'
@@ -49,13 +49,13 @@ export const AnomalyDetection: React.FC<AnomalyDetectionProps> = ({ data }) => {
               <div className="mt-3 pt-3 border-t border-gray-100/50 space-y-2">
                 <div className="flex flex-wrap gap-2">
                   {anomaly.details.pharmacy && (
-                    <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/50 border border-gray-100">
+                    <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/50 border border-gray-100 shadow-sm">
                       <span className="text-[8px] font-bold text-brand-teal uppercase opacity-60">Farmácia:</span>
                       <span className="text-[9px] font-bold text-brand-darkGray">{anomaly.details.pharmacy}</span>
                     </div>
                   )}
                   {anomaly.details.location && (
-                    <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/50 border border-gray-100">
+                    <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/50 border border-gray-100 shadow-sm">
                       <span className="text-[8px] font-bold text-brand-teal uppercase opacity-60">Região:</span>
                       <span className="text-[9px] font-bold text-brand-darkGray">{anomaly.details.location}</span>
                     </div>
@@ -65,6 +65,12 @@ export const AnomalyDetection: React.FC<AnomalyDetectionProps> = ({ data }) => {
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-[9px] font-black text-brand-salmon uppercase tracking-tighter">Impacto:</span>
                     <span className="text-[10px] font-extrabold text-brand-darkGray">{anomaly.details.impact}</span>
+                  </div>
+                )}
+                {anomaly.details.consumerId && (
+                   <div className="flex items-center gap-2">
+                    <span className="text-[9px] font-black text-brand-teal uppercase tracking-tighter">ID Origem:</span>
+                    <span className="text-[10px] font-mono text-brand-darkGray">{anomaly.details.consumerId}</span>
                   </div>
                 )}
               </div>
@@ -82,6 +88,7 @@ export const AnomalyDetection: React.FC<AnomalyDetectionProps> = ({ data }) => {
           <div className="w-1.5 h-1.5 rounded-full bg-brand-turquoise animate-pulse" />
           <span className="text-[9px] font-bold text-brand-teal uppercase tracking-widest">Motor de Fraude Ativo</span>
         </div>
+        <button className="text-[9px] font-black text-brand-turquoise uppercase hover:underline">Ver Log Completo</button>
       </div>
     </Card>
   );

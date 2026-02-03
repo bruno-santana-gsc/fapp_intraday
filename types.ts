@@ -4,6 +4,7 @@ export interface KPI {
   value: string | number;
   trend?: number;
   prefix?: string;
+  color?: string;
 }
 
 export interface FunnelStep {
@@ -16,6 +17,8 @@ export interface CategoryData {
   name: string;
   value: number;
   percentage: number;
+  rupture?: number;
+  growth?: number;
 }
 
 export interface TopProduct {
@@ -23,18 +26,21 @@ export interface TopProduct {
   category: string;
   sales: number;
   gmv: number;
+  trend?: 'up' | 'down' | 'stable';
 }
 
 export interface PharmacyPerformance {
   name: string;
   region: 'Norte' | 'Nordeste' | 'Centro-Oeste' | 'Sudeste' | 'Sul';
   gmv: number;
-  gmvDelta: number; // Porcentagem de variação vs ciclo anterior
+  gmvDelta: number;
   orders: number;
   cancellations: number;
-  cancellationDelta: number; // Variação absoluta de cancelamentos
+  cancellationDelta: number;
   deliveryTime: string;
-  deliveryTimeDelta: number; // Variação em minutos vs média
+  deliveryTimeDelta: number;
+  rupture?: number;
+  complaints?: number;
 }
 
 export interface LogisticStatus {
@@ -47,6 +53,7 @@ export interface Recommendation {
   id: string;
   type: 'alert' | 'insight' | 'opportunity';
   text: string;
+  category?: string;
 }
 
 export interface Anomaly {
@@ -61,7 +68,7 @@ export interface Anomaly {
     product?: string;
     location?: string;
     impact?: string;
-    consumerId?: string; // LGPD Compliant: Masked ID (e.g. USR-***-123)
+    consumerId?: string;
   };
 }
 
@@ -75,6 +82,8 @@ export interface GrowthData {
   period: string;
   count: number;
   ticket: number;
+  newRegistrations: number;
+  push?: boolean;
 }
 
 export interface ChannelPerformance {
@@ -88,4 +97,25 @@ export interface DevicePerformance {
   device: 'iOS' | 'Android' | 'Web';
   percentage: number;
   orders: number;
+}
+
+// Monthly Specific Types
+export interface DailyPerformance {
+  day: number;
+  delivered: number;
+  open: number;
+  cancelled: number;
+  target: number;
+  orders: number;
+  rupture: number;
+  paymentFailures: number;
+  sacClaims: number;
+}
+
+export interface MonthlyForecast {
+  projectedRevenue: number;
+  projectedOrders: number;
+  projectedCancellations: number;
+  risks: string[];
+  opportunities: string[];
 }
