@@ -1,0 +1,6 @@
+
+{
+  "name": "Dashboard Intradiário PharmaMarket",
+  "description": "Dashboard de análise intradiária para marketplace de farmácias, atualizado a cada 30 minutos com KPIs, funis e detecção de anomalias por ciclo.",
+  "requestFramePermissions": []
+}
